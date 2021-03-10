@@ -1,12 +1,14 @@
 package Project20;
 
 
+import Project20.EmployeesPage.Employees;
 import org.apache.poi.ss.usermodel.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -19,7 +21,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
-public class Project20 {
+public class Project20 extends Employees {
+    public WebDriver driver;
     /*This project does not require Page Object Model
 You do not have to use Cucumber (Java, Selenium and TestNG seem pretty enough but you are free to use other tools too)
 You will need to use ApachePOI libraries to handle excel file*/
@@ -39,10 +42,10 @@ You will need to use ApachePOI libraries to handle excel file*/
   So that, your test will not depend on Download folder in your computer but can be downloaded in a folder we define.
   This will be very helpful since this test will not be specific to your computer but it can run in any computer.*/
 
-  /*  @BeforeClass
-    public void setUp() {
+   /* @BeforeClass
+    public void setUp() throws IOException {
         System.setProperty("webdriver.chrome.driver", "/Users/MN/Desktop/chromedriver");
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -68,6 +71,8 @@ You will need to use ApachePOI libraries to handle excel file*/
         driver.findElement(By.cssSelector("button>fa-icon>svg[data-icon = \"file-excel\"]")).click();
     }*/
 
+
+
 /*
 - Read from the excel file and to validate all the information on the Employees page correctly saved/exported.
   The way you validate each info is up to you! You are the tester.
@@ -78,10 +83,10 @@ You will need to use ApachePOI libraries to handle excel file*/
 Good luck!
  */
 
-    @Test
-    public void ValidationEmployeesExport() throws IOException {
+        @Test
+        public void ValidationEmployeesExport() throws IOException {
 
-        //Connection to Excel file
+       /* //Connection to Excel file
         File file = new File("/Users/MN/Downloads/SheetJS.xlsx");
         Workbook workbook = WorkbookFactory.create(file);
 
@@ -120,8 +125,23 @@ Good luck!
 
 
 
+
+    }*/
+            String path = "/Users/MN/Downloads/SheetJS.xlsx";
+
+            ExcelReader reader = new ExcelReader(path);
+
+            reader.fillTheCell(1);
+
+            List<Map<String, String>> listOfmaps = reader.getListOfMaps();
+
+            for (Map<String, String> map : listOfmaps) {
+                System.out.println(map);
+            }
+
+
+        }
     }
-}
 
 
 
