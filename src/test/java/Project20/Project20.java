@@ -1,27 +1,15 @@
 package Project20;
 
 
-import Project20.EmployeesPage.Employees;
-import org.apache.poi.ss.usermodel.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 
-public class Project20 extends Employees {
+public class Project20 {
     public WebDriver driver;
     /*This project does not require Page Object Model
 You do not have to use Cucumber (Java, Selenium and TestNG seem pretty enough but you are free to use other tools too)
@@ -86,6 +74,17 @@ Good luck!
         @Test
         public void ValidationEmployeesExport() throws IOException {
 
+            String path = "/Users/MN/Downloads/SheetJS.xlsx";
+
+            ApachePOI apache = new ApachePOI(path);
+            List<List<String>> theData = apache.getTheData();
+            List<List<String>> dataFromTable = apache.getDataFromTable();
+
+            System.out.println("111" +theData);
+            System.out.println("222" +dataFromTable);
+
+            Assert.assertEquals(theData, dataFromTable);
+
        /* //Connection to Excel file
         File file = new File("/Users/MN/Downloads/SheetJS.xlsx");
         Workbook workbook = WorkbookFactory.create(file);
@@ -127,17 +126,14 @@ Good luck!
 
 
     }*/
-            String path = "/Users/MN/Downloads/SheetJS.xlsx";
 
-            ExcelReader reader = new ExcelReader(path);
 
-            reader.fillTheCell(1);
-
-            List<Map<String, String>> listOfmaps = reader.getListOfMaps();
-
-            for (Map<String, String> map : listOfmaps) {
-                System.out.println(map);
-            }
+           // for (List<String> list1 : theData) {
+            //    System.out.println(list1);
+            //}
+            //for (List<String> list2 : dataFromTable) {
+              //  System.out.println(list2);
+            //}
 
 
         }
